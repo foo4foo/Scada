@@ -29,11 +29,21 @@ namespace Scada
                 {
                     case "Analog Input":
                         dataConcentratorManager.Add_Tag(new AnalogInput(
-                            ), "Analog Input");
+                            tag_name_textbox.Text,
+                            description_textbox.Text,
+                            io_address_textbox.Text,
+                            int.Parse(scan_time_textbox.Text),
+                            get_alarms(),
+                            units_textbox.Text), "Analog Input");
                         break;
 
                     case "Analog Output":
-
+                        dataConcentratorManager.Add_Tag(new AnalogOutput(
+                            tag_name_textbox.Text,
+                            description_textbox.Text,
+                            io_address_textbox.Text,
+                            int.Parse(init_value_textbox.Text),
+                            units_textbox.Text), "Analog Output");
                         break;
 
                     case "Digital Input":
@@ -41,12 +51,16 @@ namespace Scada
                             this.tag_name_textbox.Text,
                             this.description_textbox.Text,
                             this.io_address_textbox.Text,
-                            int.Parse(this.scan_time_textbox.Text)
-                            ), "Digital Input");
+                            int.Parse(this.scan_time_textbox.Text)), 
+                            "Digital Input");
                         break;
 
                     case "Digital Output":
-
+                        dataConcentratorManager.Add_Tag(new DigitalOutput(
+                            this.tag_name_textbox.Text,
+                            this.description_textbox.Text,
+                            this.io_address_textbox.Text,
+                            int.Parse(init_value_textbox.Text)), "Digital Output");
                         break;
 
                     default:
@@ -129,6 +143,18 @@ namespace Scada
                     initial_value.Show();
                 }
             }
+        }
+
+        private List<Alarm> get_alarms()
+        {
+            List<Alarm> alarms = new List<Alarm>();
+            foreach(Alarm alarm in dataConcentratorManager.alarms)
+            {
+                if (alarm.Tag.Equals(tag_name_textbox.Text))
+                    alarms.Add(alarm);
+            }
+
+            return alarms;
         }
 
         private void add_alarms_Click(object sender, EventArgs e)

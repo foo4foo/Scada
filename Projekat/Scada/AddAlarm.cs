@@ -29,7 +29,7 @@ namespace Scada
 
         private void submit_Click(object sender, EventArgs e)
         {
-            this.dataConcentratorManager.alarms.Add(
+            dataConcentratorManager.Add_Alarm(
                 new lib.Alarm(
                     generateID().GetHashCode().ToString(),
                     tag_textbox.Text,

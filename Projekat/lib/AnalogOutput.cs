@@ -14,6 +14,16 @@ namespace lib
         private int initial_value;
         private String units;
 
+        public AnalogOutput(String name, String desc, String io,
+            int init, String unit)
+        {
+            this.tagName = name;
+            this.description = desc;
+            this.IO_address = io;
+            this.initial_value = init;
+            this.units = unit;
+        }
+
         public AnalogOutput() { }
 
         public string TagName

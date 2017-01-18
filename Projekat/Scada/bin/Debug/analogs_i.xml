@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAnalogInput xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AnalogInput>
+    <TagName>wadawdwad</TagName>
+    <Description>eadawadw</Description>
+    <IO_address1>awdawdadw</IO_address1>
+    <Scan_time>4322</Scan_time>
+    <Alarms>
+      <Alarm>
+        <Id>318938407</Id>
+        <Tag>wadawdwad</Tag>
+        <Message>jlihkgjhf</Message>
+        <Limit_value>77</Limit_value>
+        <Above>true</Above>
+      </Alarm>
+    </Alarms>
+    <Units>C</Units>
+  </AnalogInput>
+</ArrayOfAnalogInput>

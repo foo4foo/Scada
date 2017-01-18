@@ -13,6 +13,15 @@ namespace lib
         private String IO_address;
         private int initial_value;
 
+        public DigitalOutput(String name, String desc, String io,
+            int init)
+        {
+            this.tag_name = name;
+            this.description = desc;
+            this.IO_address = io;
+            this.initial_value = init;
+        }
+
         public DigitalOutput() { }
         public string Tag_name
         {
