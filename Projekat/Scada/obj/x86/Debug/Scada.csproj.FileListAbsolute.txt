@@ -1,0 +1,41 @@
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\bin\Debug\Scada.exe
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\bin\Debug\Scada.pdb
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\bin\Debug\DataConcentrator.dll
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\bin\Debug\PLCSimulator.dll
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\bin\Debug\DataConcentrator.pdb
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\bin\Debug\PLCSimulator.pdb
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\obj\x86\Debug\Scada.MainForm.resources
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\obj\x86\Debug\Scada.Properties.Resources.resources
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\obj\x86\Debug\Scada.exe
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\Scada\obj\x86\Debug\Scada.pdb
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\obj\x86\Debug\Scada.exe
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\obj\x86\Debug\Scada.pdb
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\bin\Debug\Scada.exe
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\bin\Debug\Scada.pdb
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\bin\Debug\DataConcentrator.dll
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\bin\Debug\PLCSimulator.dll
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\bin\Debug\DataConcentrator.pdb
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\bin\Debug\PLCSimulator.pdb
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\obj\x86\Debug\Scada.csprojResolveAssemblyReference.cache
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\obj\x86\Debug\Scada.MainForm.resources
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\obj\x86\Debug\Scada.Properties.Resources.resources
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\obj\x86\Debug\Scada.csproj.GenerateResource.Cache
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.csprojResolveAssemblyReference.cache
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.Properties.Resources.resources
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.csproj.GenerateResource.Cache
+D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\Scada.exe
+D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\Scada.pdb
+D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\DataConcentrator.dll
+D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\lib.dll
+D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\PLCSimulator.dll
+D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\DataConcentrator.pdb
+D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\lib.pdb
+D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\PLCSimulator.pdb
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.exe
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.pdb
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.AddForm.resources
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.Main.resources
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.AddAlarm.resources

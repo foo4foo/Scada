@@ -1,0 +1,23 @@
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\DataConcentrator\bin\Debug\DataConcentrator.dll
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\DataConcentrator\bin\Debug\DataConcentrator.pdb
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\DataConcentrator\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\DataConcentrator\obj\Debug\DataConcentrator.dll
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\DataConcentrator\obj\Debug\DataConcentrator.pdb
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\DataConcentrator\bin\Debug\PLCSimulator.dll
+C:\Documents and Settings\Administrator\Desktop\PSNUS_Projekat\Projekat\DataConcentrator\bin\Debug\PLCSimulator.pdb
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\DataConcentrator\bin\Debug\DataConcentrator.dll
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\DataConcentrator\bin\Debug\DataConcentrator.pdb
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\DataConcentrator\bin\Debug\PLCSimulator.dll
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\DataConcentrator\bin\Debug\PLCSimulator.pdb
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\DataConcentrator\obj\Debug\DataConcentrator.csprojResolveAssemblyReference.cache
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\DataConcentrator\obj\Debug\DataConcentrator.dll
+C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\DataConcentrator\obj\Debug\DataConcentrator.pdb
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\obj\Debug\DataConcentrator.csprojResolveAssemblyReference.cache
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\DataConcentrator.dll
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\DataConcentrator.pdb
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\lib.dll
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\PLCSimulator.dll
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\lib.pdb
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\PLCSimulator.pdb
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\obj\Debug\DataConcentrator.dll
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\obj\Debug\DataConcentrator.pdb
