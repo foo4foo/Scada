@@ -27,7 +27,7 @@ namespace Scada
 
         private void add_tag_Click(object sender, EventArgs e)
         {
-            AddForm add_form = new AddForm(dataConcentratorManager);
+            AddForm add_form = new AddForm(dataConcentratorManager, this);
             add_form.Show();
         }
 
@@ -37,29 +37,7 @@ namespace Scada
             dataConcentratorManager.loadXML();
         }
 
-        private void refresh_Click(object sender, EventArgs e)
-        {
-            
-            MessageBox.Show(dataConcentratorManager.digitals_i.Count.ToString());
-        }
-
         private void tag_selector_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            dataGridView1.DataSource = null;
-            if (tag_selector.SelectedIndex >= 0)
-            {
-                if (tag_selector.SelectedItem.Equals("Analog Input"))
-                    dataGridView1.DataSource = this.dataConcentratorManager.analogs_i;
-                else if (tag_selector.SelectedItem.Equals("Analog Output"))
-                    dataGridView1.DataSource = this.dataConcentratorManager.analogs_o;
-                else if (tag_selector.SelectedItem.Equals("Digital Input"))
-                    dataGridView1.DataSource = this.dataConcentratorManager.digitals_i;
-                else
-                    dataGridView1.DataSource = this.dataConcentratorManager.digitals_o;
-            }
-        }
-
-        private void timer_Tick(object sender, EventArgs e)
         {
             dataGridView1.DataSource = null;
             if (tag_selector.SelectedIndex >= 0)
@@ -81,12 +59,7 @@ namespace Scada
             addAlarm.Show();
         }
 
-        private void refresh1_Click(object sender, EventArgs e)
-        {
-            refresh();
-        }
-
-        private void refresh()
+        public void refresh()
         {
             dataGridView1.DataSource = null;
             if (tag_selector.SelectedIndex >= 0)
@@ -104,12 +77,72 @@ namespace Scada
 
         private void remove_tag_Click(object sender, EventArgs e)
         {
+            if (tag_selector.SelectedIndex >= 0)
+            {
+                switch (tag_selector.SelectedItem.ToString())
+                {
+                    case "Analog Input":
+                        for (int i = 0;
+                            i < dataConcentratorManager.analogs_i.Count; i++)
+                        {
+                            if (tag_name_textbox.Text.Equals(dataConcentratorManager.analogs_i[i].TagName))
+                            {
+                                dataConcentratorManager.analogs_i.Remove(dataConcentratorManager.analogs_i[i]);
+                                tag_name_textbox.Text = "";
+                            }
+                        }
+                        break;
 
+                    case "Analog Output":
+                        for (int i = 0;
+                            i < dataConcentratorManager.analogs_o.Count; i++)
+                        {
+                            if (tag_name_textbox.Text.Equals(dataConcentratorManager.analogs_o[i].TagName))
+                            {
+                                dataConcentratorManager.analogs_o.Remove(dataConcentratorManager.analogs_o[i]);
+                                tag_name_textbox.Text = "";
+                            }
+                        }
+                        break;
+
+                    case "Digital Input":
+                        for (int i = 0;
+                            i < dataConcentratorManager.digitals_i.Count; i++)
+                        {
+                            if (tag_name_textbox.Text.Equals(dataConcentratorManager.digitals_i[i].Tag_name))
+                            {
+                                dataConcentratorManager.digitals_i.Remove(dataConcentratorManager.digitals_i[i]);
+                                tag_name_textbox.Text = "";
+                            }
+                        }
+                        break;
+
+                    case "Digital Output":
+                        for (int i = 0;
+                            i < dataConcentratorManager.digitals_o.Count; i++)
+                        {
+                            if (tag_name_textbox.Text.Equals(dataConcentratorManager.digitals_o[i].Tag_name))
+                            {
+                                dataConcentratorManager.digitals_o.Remove(dataConcentratorManager.digitals_o[i]);
+                                tag_name_textbox.Text = "";
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select Tag type first.");
+            }
         }
 
         private void remove_alarm_Click(object sender, EventArgs e)
         {
-
+            RemoveAlarmForm raf = new RemoveAlarmForm(this.dataConcentratorManager);
+            raf.Show();
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)

@@ -39,3 +39,4 @@ D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.pdb
 D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.AddForm.resources
 D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.Main.resources
 D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.AddAlarm.resources
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.RemoveAlarmForm.resources

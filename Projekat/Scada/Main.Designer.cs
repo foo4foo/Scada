@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.add_tag = new System.Windows.Forms.Button();
             this.tag_selector = new System.Windows.Forms.ComboBox();
             this.remove_tag = new System.Windows.Forms.Button();
             this.remove_alarm = new System.Windows.Forms.Button();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.add_alarm = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tag_name_textbox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +53,7 @@
             // 
             // add_tag
             // 
-            this.add_tag.Location = new System.Drawing.Point(12, 255);
+            this.add_tag.Location = new System.Drawing.Point(116, 255);
             this.add_tag.Name = "add_tag";
             this.add_tag.Size = new System.Drawing.Size(114, 23);
             this.add_tag.TabIndex = 1;
@@ -77,7 +77,7 @@
             // 
             // remove_tag
             // 
-            this.remove_tag.Location = new System.Drawing.Point(132, 255);
+            this.remove_tag.Location = new System.Drawing.Point(182, 289);
             this.remove_tag.Name = "remove_tag";
             this.remove_tag.Size = new System.Drawing.Size(102, 23);
             this.remove_tag.TabIndex = 4;
@@ -87,18 +87,13 @@
             // 
             // remove_alarm
             // 
-            this.remove_alarm.Location = new System.Drawing.Point(453, 255);
+            this.remove_alarm.Location = new System.Drawing.Point(454, 255);
             this.remove_alarm.Name = "remove_alarm";
             this.remove_alarm.Size = new System.Drawing.Size(102, 23);
             this.remove_alarm.TabIndex = 5;
             this.remove_alarm.Text = "Remove Alarm";
             this.remove_alarm.UseVisualStyleBackColor = true;
             this.remove_alarm.Click += new System.EventHandler(this.remove_alarm_Click);
-            // 
-            // timer
-            // 
-            this.timer.Enabled = true;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // add_alarm
             // 
@@ -119,11 +114,29 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Select Tag Type:";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 294);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Tag Name:";
+            // 
+            // tag_name_textbox
+            // 
+            this.tag_name_textbox.Location = new System.Drawing.Point(76, 290);
+            this.tag_name_textbox.Name = "tag_name_textbox";
+            this.tag_name_textbox.Size = new System.Drawing.Size(100, 20);
+            this.tag_name_textbox.TabIndex = 10;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(568, 335);
+            this.Controls.Add(this.tag_name_textbox);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.add_alarm);
             this.Controls.Add(this.remove_alarm);
@@ -148,8 +161,9 @@
         private System.Windows.Forms.ComboBox tag_selector;
         private System.Windows.Forms.Button remove_tag;
         private System.Windows.Forms.Button remove_alarm;
-        private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Button add_alarm;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tag_name_textbox;
     }
 }

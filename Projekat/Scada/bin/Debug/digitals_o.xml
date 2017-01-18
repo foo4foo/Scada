@@ -1,15 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfDigitalOutput xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DigitalOutput>
-    <Tag_name>hukgjhtdgrs</Tag_name>
-    <Description>hjgfds</Description>
-    <IO_address1>jyhtdg</IO_address1>
-    <Initial_value>543</Initial_value>
-  </DigitalOutput>
-  <DigitalOutput>
-    <Tag_name>ppp</Tag_name>
-    <Description>p</Description>
-    <IO_address1>ppp</IO_address1>
-    <Initial_value>999</Initial_value>
-  </DigitalOutput>
-</ArrayOfDigitalOutput>
+<ArrayOfDigitalOutput xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />

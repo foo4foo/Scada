@@ -14,10 +14,13 @@ namespace Scada
     public partial class AddForm : Form
     {
         DataConcentratorManager dataConcentratorManager;
+        Main form;
 
-        public AddForm(DataConcentratorManager dataConcentratorManager)
+        public AddForm(DataConcentratorManager dataConcentratorManager, Main form)
         {
             this.dataConcentratorManager = dataConcentratorManager;
+            this.form = form;
+
             InitializeComponent();
         }
 
@@ -35,6 +38,7 @@ namespace Scada
                             int.Parse(scan_time_textbox.Text),
                             get_alarms(),
                             units_textbox.Text), "Analog Input");
+                        this.form.refresh();
                         break;
 
                     case "Analog Output":
@@ -44,6 +48,7 @@ namespace Scada
                             io_address_textbox.Text,
                             int.Parse(init_value_textbox.Text),
                             units_textbox.Text), "Analog Output");
+                        this.form.refresh();
                         break;
 
                     case "Digital Input":
@@ -53,6 +58,7 @@ namespace Scada
                             this.io_address_textbox.Text,
                             int.Parse(this.scan_time_textbox.Text)), 
                             "Digital Input");
+                        this.form.refresh();
                         break;
 
                     case "Digital Output":
@@ -61,6 +67,7 @@ namespace Scada
                             this.description_textbox.Text,
                             this.io_address_textbox.Text,
                             int.Parse(init_value_textbox.Text)), "Digital Output");
+                        this.form.refresh();
                         break;
 
                     default:

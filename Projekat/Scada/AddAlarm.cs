@@ -13,9 +13,11 @@ namespace Scada
     public partial class AddAlarm : Form
     {
         DataConcentratorManager dataConcentratorManager;
+
         public AddAlarm(DataConcentratorManager dataConcentratorManager)
         {
             this.dataConcentratorManager = dataConcentratorManager;
+
             InitializeComponent();
         }
 
