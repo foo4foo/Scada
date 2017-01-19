@@ -1,19 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfAnalogInput xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <AnalogInput>
-    <TagName>temperatura</TagName>
+    <TagName>temperaturaaa</TagName>
     <Description>wgr</Description>
     <IO_address1>q543</IO_address1>
     <Scan_time>5555</Scan_time>
     <Alarms>
       <Alarm>
-        <Id>1053425447</Id>
-        <Tag>temperatura</Tag>
+        <Id>104521788</Id>
+        <Tag>temperaturaaa</Tag>
         <Message>pozar</Message>
-        <Limit_value>100</Limit_value>
+        <Limit_value>30</Limit_value>
         <Above>true</Above>
       </Alarm>
     </Alarms>
     <Units>b</Units>
+  </AnalogInput>
+  <AnalogInput>
+    <TagName>t</TagName>
+    <Description>t</Description>
+    <IO_address1>qq</IO_address1>
+    <Scan_time>12345</Scan_time>
+    <Alarms />
+    <Units>c</Units>
+  </AnalogInput>
+  <AnalogInput>
+    <TagName>temp</TagName>
+    <Description>q</Description>
+    <IO_address1>0</IO_address1>
+    <Scan_time>55</Scan_time>
+    <Alarms>
+      <Alarm>
+        <Id>1730814734</Id>
+        <Tag>temp</Tag>
+        <Message>pozar</Message>
+        <Limit_value>10</Limit_value>
+        <Above>true</Above>
+      </Alarm>
+    </Alarms>
+    <Units>c</Units>
+  </AnalogInput>
+  <AnalogInput>
+    <TagName>q</TagName>
+    <Description>q</Description>
+    <IO_address1>123</IO_address1>
+    <Scan_time>4321</Scan_time>
+    <Alarms />
+    <Units>ff</Units>
   </AnalogInput>
 </ArrayOfAnalogInput>

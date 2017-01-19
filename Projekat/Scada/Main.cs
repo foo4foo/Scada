@@ -15,6 +15,7 @@ namespace Scada
     public partial class Main : Form
     {
         DataConcentratorManager dataConcentratorManager;
+        Thread nit;
 
         public Main(DataConcentratorManager dataConcentratorManager)
         {
@@ -22,7 +23,42 @@ namespace Scada
             this.MinimizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.dataConcentratorManager = dataConcentratorManager;
+            this.dataConcentratorManager.AlarmOccured += new AlarmOccurredEventHandler(alarm_occurred);
+
             InitializeComponent();
+
+            //alarm_checker = new KeyValuePair<string, double>();
+
+            nit = new Thread(checker);
+
+            nit.Start();
+        }
+
+        public void checker()
+        {
+            while (true)
+            {
+                if (dataConcentratorManager.CatchAlarms().Value)
+                {
+                    //istitaj iz baze alarm i prosledi string u event
+                    this.dataConcentratorManager.AlarmOccuredFoo(
+                        String.Format("Alarm (ID: {0}) occurred. Value: {1}", 
+                        dataConcentratorManager.CatchAlarms().Key,
+                        dataConcentratorManager.CatchAlarms().Value).ToString());
+
+                    this.dataConcentratorManager.AlarmOccured -= (AlarmOccurredEventHandler)alarm_occurred;
+                }
+            }
+        }
+
+        public void alarm_occurred(String name)
+        {
+            MessageBox.Show(updateMsg(name));
+        }
+
+        public String updateMsg(String name)
+        {
+            return this.dataConcentratorManager.getAlarmID(name);
         }
 
         private void add_tag_Click(object sender, EventArgs e)

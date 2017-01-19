@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Linq;
 using System.Xml.Serialization;
 using System.IO;
@@ -9,9 +10,17 @@ using lib;
 
 namespace DataConcentrator
 {
+    public delegate void TagValueChangedEventHanlder(String msg);
+    public delegate void AlarmOccurredEventHandler(String msg);
     public class DataConcentratorManager
     {
         PLCSimulatorManager plcSimulatorManager;
+
+        public KeyValuePair<string, bool> ALARM;
+
+        public event TagValueChangedEventHanlder TagValueChanged;
+        public event AlarmOccurredEventHandler AlarmOccured;
+
 
         public const String xml_analogs_i = "analogs_i.xml";
         public const String xml_analogs_o = "analogs_o.xml";
@@ -26,8 +35,8 @@ namespace DataConcentrator
 
         public DataConcentratorManager()
         {
+
             plcSimulatorManager = new PLCSimulatorManager();
-            plcSimulatorManager.StartPLCSimulator();
 
             alarms = new List<Alarm>();
             analogs_i = new List<AnalogInput>();
@@ -35,7 +44,74 @@ namespace DataConcentrator
             digitals_i = new List<DigitalInput>();
             digitals_o = new List<DigitalOutput>();
 
+            //OnTagValueChanged();
+
             loadXML();
+
+            ALARM = new KeyValuePair<string, bool>();
+
+            plcSimulatorManager.loadAlarms(alarms);
+            plcSimulatorManager.loadTags(analogs_i);
+
+            plcSimulatorManager.StartPLCSimulator();
+            plcSimulatorManager.t5.Start();
+
+        }
+
+        //public KeyValuePari<string, bool> CatchAlarms(){ }
+        //foreach(KeyValuePair<string, bool> pair in plcSimulatorManager.alarm_occured){
+        //if ...
+        //return pair;
+        //}
+        public KeyValuePair<string, bool> CatchAlarms()
+        {
+            foreach(KeyValuePair<string, bool> pair in plcSimulatorManager.alarm_occured)
+            {
+                Thread.Sleep(200);
+
+                if (pair.Value == true)
+                {
+                    
+                    //posalji event na formu
+                    //ALARM = pair;
+                    return pair;
+
+                }
+
+                plcSimulatorManager.alarm_occured.TryUpdate(pair.Key, false, true);
+                //plcSimulatorManager.alarm_occured[pair.Key] = false;
+            }
+
+            return new KeyValuePair<string, bool>();
+        }
+
+        public void TagChanged(String msg)
+        {
+            OnTagValueChanged(msg);
+        }
+
+        protected virtual void OnTagValueChanged(String msg)
+        {
+            if (TagValueChanged != null)
+            {
+                TagValueChanged(msg);
+            }
+        }
+
+        public void AlarmOccuredFoo(String msg)
+        {
+            OnAlarmOccuredChange(msg);
+        }
+
+        protected virtual void OnAlarmOccuredChange(String msg)
+        {
+            if (AlarmOccured != null)
+                AlarmOccured(msg);
+        }
+
+        public String getAlarmID(String st)
+        {
+            return String.Format("{0}", st).ToString();
         }
 
         public void Add_Tag(Object obj, String type)
@@ -44,23 +120,32 @@ namespace DataConcentrator
             {
                 case "Analog Input":
                     analogs_i.Add((AnalogInput)obj);
+                    plcSimulatorManager.addresses.TryAdd(analogs_i[analogs_i.Count - 1].IO_address1, 0); //[analogs_i[analogs_i.Count - 1].IO_address1] = 0;
                     break;
 
                 case "Analog Output":
                     analogs_o.Add((AnalogOutput)obj);
+                    plcSimulatorManager.addresses.TryAdd(analogs_o[analogs_o.Count - 1].IO_address1, 0);
                     break;
 
                 case "Digital Input":
                     digitals_i.Add((DigitalInput)obj);
+                    plcSimulatorManager.addresses.TryAdd(digitals_i[digitals_i.Count - 1].IO_address1, 0);
                     break;
 
                 case "Digital Output":
                     digitals_o.Add((DigitalOutput)obj);
+                    plcSimulatorManager.addresses.TryAdd(digitals_o[digitals_o.Count - 1].IO_address1, 0);
                     break;
 
                 default:
                     break;
             }
+        }
+
+        public void write_alarm_info()
+        {
+            //snimi u bazu
         }
 
         public bool check_if_tag_exists(String type, String tagName)
@@ -116,7 +201,15 @@ namespace DataConcentrator
                     {
                         if (tag.Equals(analogs_i[i].TagName))
                         {
-                            analogs_i.Remove(analogs_i[i]);
+                            AnalogInput ai = analogs_i[i];
+
+                            analogs_i.Remove(analogs_i[i]);     
+
+                            if (plcSimulatorManager.ainputs.TryRemove(ai.IO_address1, out ai))
+                            {
+                                //pass
+                            }
+
                         }
                     }
                     break;
@@ -162,12 +255,13 @@ namespace DataConcentrator
         public void Add_Alarm(Alarm alarm)
         {
             this.alarms.Add(alarm);
+            plcSimulatorManager.alarms.TryAdd(alarm.Id, alarm);
 
-            for(int i = 0; i < analogs_i.Count; i++)
+            for (int i = 0; i < analogs_i.Count; i++)
             {
                 if (alarm.Tag.Equals(analogs_i[i].TagName))
                 {
-                    analogs_i[i].Alarms.Add(alarm);
+                    analogs_i[i].Alarms.Add(alarm); 
                 }
             }
         }
@@ -186,7 +280,14 @@ namespace DataConcentrator
                         {
                             if (ainput.Alarms[j].Id.Equals(id))
                             {
+                                Alarm alarm = ainput.Alarms[j];
+
                                 ainput.Alarms.Remove(ainput.Alarms[j]);
+
+                                if (plcSimulatorManager.alarms.TryRemove(alarm.Tag, out alarm))
+                                {
+                                    //pass
+                                }
                             }
                         }
                     }

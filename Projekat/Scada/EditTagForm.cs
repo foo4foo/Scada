@@ -16,19 +16,31 @@ namespace Scada
 
         private String previous_name;
 
-        DataConcentratorManager dataConcentratorManager;
+        public DataConcentratorManager dataConcentratorManager;
         Main form;
 
         public EditTagForm(String type, String tag_name, 
             DataConcentratorManager dataConcentratorManager, Main main)
         {
-            
+
             this.dataConcentratorManager = dataConcentratorManager;
+            this.dataConcentratorManager.TagValueChanged += new TagValueChangedEventHanlder(tag_changed);
+            //AlarmOccurred += new AlarmOccuredEventHanlder(alarm);
             this.form = main;
             this.previous_name = tag_name;
             this.tag_type = type;
 
             InitializeComponent();
+        }
+
+        public void tag_changed(String name)
+        {
+            MessageBox.Show(updateMsg(name));
+        }
+
+        public String updateMsg(String name)
+        {
+            return "Tag has been updated";
         }
 
         public bool tag_exists()
@@ -236,6 +248,8 @@ namespace Scada
                             dataConcentratorManager.analogs_i[i].IO_address1 = io_textbox.Text;
                             dataConcentratorManager.analogs_i[i].Scan_time = int.Parse(stime_textbox.Text);
                             dataConcentratorManager.analogs_i[i].Units = units_textbox.Text;
+
+                            break;
                         }
                     }
 
@@ -249,6 +263,12 @@ namespace Scada
 
                     this.form.refresh();
 
+                    this.dataConcentratorManager.TagChanged(updateMsg(""));
+
+                    this.dataConcentratorManager.TagValueChanged -= (TagValueChangedEventHanlder)tag_changed;
+
+                    //dataConcentratorManager.write_alarm_info();
+
                     break;
 
                 case "Analog Output":
@@ -261,10 +281,16 @@ namespace Scada
                             dataConcentratorManager.analogs_o[i].IO_address1 = io_textbox.Text;
                             dataConcentratorManager.analogs_o[i].Initial_value = int.Parse(init_textbox.Text);
                             dataConcentratorManager.analogs_o[i].Units = units_textbox.Text;
-                        }
 
-                        this.form.refresh();
+                            break;
+                        }
                     }
+
+                    this.form.refresh();
+
+                    this.dataConcentratorManager.TagChanged(updateMsg(""));
+
+                    this.dataConcentratorManager.TagValueChanged -= (TagValueChangedEventHanlder)tag_changed;
 
                     break;
 
@@ -277,10 +303,16 @@ namespace Scada
                             dataConcentratorManager.digitals_i[i].Description = desc_textbox.Text;
                             dataConcentratorManager.digitals_i[i].IO_address1 = io_textbox.Text;
                             dataConcentratorManager.digitals_i[i].Scan_time = int.Parse(stime_textbox.Text);
+
+                            break;
                         }
                     }
 
                     this.form.refresh();
+
+                    this.dataConcentratorManager.TagChanged(updateMsg(""));
+
+                    this.dataConcentratorManager.TagValueChanged -= (TagValueChangedEventHanlder)tag_changed;
 
                     break;
 
@@ -294,10 +326,17 @@ namespace Scada
                             dataConcentratorManager.digitals_o[i].Description = desc_textbox.Text;
                             dataConcentratorManager.digitals_o[i].IO_address1 = io_textbox.Text;
                             dataConcentratorManager.digitals_o[i].Initial_value = int.Parse(init_textbox.Text);
+
+
+                            break;
                         }
                     }
 
                     this.form.refresh();
+
+                    this.dataConcentratorManager.TagChanged(updateMsg(""));
+
+                    this.dataConcentratorManager.TagValueChanged -= (TagValueChangedEventHanlder)tag_changed;
 
                     break;
 
