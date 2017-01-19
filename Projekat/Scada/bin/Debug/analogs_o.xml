@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfAnalogOutput xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfAnalogOutput xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AnalogOutput>
+    <TagName>gujomir</TagName>
+    <Description>bukisa</Description>
+    <IO_address1>123</IO_address1>
+    <Initial_value>123</Initial_value>
+    <Units>u</Units>
+  </AnalogOutput>
+</ArrayOfAnalogOutput>

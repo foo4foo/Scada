@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfDigitalOutput xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfDigitalOutput xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DigitalOutput>
+    <Tag_name>too</Tag_name>
+    <Description>too</Description>
+    <IO_address1>too</IO_address1>
+    <Initial_value>2</Initial_value>
+  </DigitalOutput>
+</ArrayOfDigitalOutput>

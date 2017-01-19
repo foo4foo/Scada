@@ -31,43 +31,71 @@ namespace Scada
                 switch (analog_digital_io.SelectedItem.ToString())
                 {
                     case "Analog Input":
-                        dataConcentratorManager.Add_Tag(new AnalogInput(
-                            tag_name_textbox.Text,
-                            description_textbox.Text,
-                            io_address_textbox.Text,
-                            int.Parse(scan_time_textbox.Text),
-                            get_alarms(),
-                            units_textbox.Text), "Analog Input");
-                        this.form.refresh();
+                        if (!dataConcentratorManager.check_if_tag_exists(
+                            analog_digital_io.SelectedItem.ToString(), tag_name_textbox.Text.ToString()))
+                        {
+                                dataConcentratorManager.Add_Tag(new AnalogInput(
+                                tag_name_textbox.Text.ToString(),
+                                description_textbox.Text.ToString(),
+                                io_address_textbox.Text.ToString(),
+                                int.Parse(scan_time_textbox.Text.ToString()),
+                                get_alarms(),
+                                units_textbox.Text.ToString()), "Analog Input");
+                                this.form.refresh();
+                        } else
+                        {
+                            MessageBox.Show("Tag already exists.");
+                        }
                         break;
 
                     case "Analog Output":
-                        dataConcentratorManager.Add_Tag(new AnalogOutput(
-                            tag_name_textbox.Text,
-                            description_textbox.Text,
-                            io_address_textbox.Text,
-                            int.Parse(init_value_textbox.Text),
-                            units_textbox.Text), "Analog Output");
-                        this.form.refresh();
+                        if (!dataConcentratorManager.check_if_tag_exists(
+                            analog_digital_io.SelectedItem.ToString(), tag_name_textbox.Text.ToString()))
+                        {
+                                dataConcentratorManager.Add_Tag(new AnalogOutput(
+                                tag_name_textbox.Text.ToString(),
+                                description_textbox.Text.ToString(),
+                                io_address_textbox.Text.ToString(),
+                                int.Parse(init_value_textbox.Text.ToString()),
+                                units_textbox.Text.ToString()), "Analog Output");
+                                this.form.refresh();
+                        } else
+                        {
+                            MessageBox.Show("Tag already exists.");
+                        }
                         break;
 
                     case "Digital Input":
-                        dataConcentratorManager.Add_Tag(new DigitalInput(
-                            this.tag_name_textbox.Text,
-                            this.description_textbox.Text,
-                            this.io_address_textbox.Text,
-                            int.Parse(this.scan_time_textbox.Text)), 
-                            "Digital Input");
-                        this.form.refresh();
+                        if (!dataConcentratorManager.check_if_tag_exists(
+                            analog_digital_io.SelectedItem.ToString(), tag_name_textbox.Text.ToString()))
+                        {
+                                dataConcentratorManager.Add_Tag(new DigitalInput(
+                                this.tag_name_textbox.Text.ToString(),
+                                this.description_textbox.Text.ToString(),
+                                this.io_address_textbox.Text.ToString(),
+                                int.Parse(this.scan_time_textbox.Text.ToString())),
+                                "Digital Input");
+                                this.form.refresh();
+                        } else
+                        {
+                            MessageBox.Show("Tag already exists.");
+                        }
                         break;
 
                     case "Digital Output":
-                        dataConcentratorManager.Add_Tag(new DigitalOutput(
-                            this.tag_name_textbox.Text,
-                            this.description_textbox.Text,
-                            this.io_address_textbox.Text,
-                            int.Parse(init_value_textbox.Text)), "Digital Output");
-                        this.form.refresh();
+                        if (!dataConcentratorManager.check_if_tag_exists(
+                            analog_digital_io.SelectedItem.ToString(), tag_name_textbox.Text.ToString()))
+                        {
+                                dataConcentratorManager.Add_Tag(new DigitalOutput(
+                                this.tag_name_textbox.Text.ToString(),
+                                this.description_textbox.Text.ToString(),
+                                this.io_address_textbox.Text.ToString(),
+                                int.Parse(init_value_textbox.Text.ToString())), "Digital Output");
+                                this.form.refresh();
+                        } else
+                        {
+                            MessageBox.Show("Tag already exists.");
+                        }
                         break;
 
                     default:

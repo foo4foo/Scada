@@ -54,5 +54,10 @@ namespace Scada
 
             return id.ToString();
         }
+
+        private void AddAlarm_Load(object sender, EventArgs e)
+        {
+            bound_combo.SelectedItem = "Above";
+        }
     }
 }

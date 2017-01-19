@@ -33,7 +33,7 @@ namespace Scada
 
         private void Main_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = this.dataConcentratorManager.analogs_i;
+            tag_selector.SelectedItem = "Analog Input";
             dataConcentratorManager.loadXML();
         }
 
@@ -79,59 +79,11 @@ namespace Scada
         {
             if (tag_selector.SelectedIndex >= 0)
             {
-                switch (tag_selector.SelectedItem.ToString())
-                {
-                    case "Analog Input":
-                        for (int i = 0;
-                            i < dataConcentratorManager.analogs_i.Count; i++)
-                        {
-                            if (tag_name_textbox.Text.Equals(dataConcentratorManager.analogs_i[i].TagName))
-                            {
-                                dataConcentratorManager.analogs_i.Remove(dataConcentratorManager.analogs_i[i]);
-                                tag_name_textbox.Text = "";
-                            }
-                        }
-                        break;
+                dataConcentratorManager.Remove_Tag(tag_selector.SelectedItem.ToString(),
+                    tag_name_textbox.Text);
+                tag_name_textbox.Text = "";
 
-                    case "Analog Output":
-                        for (int i = 0;
-                            i < dataConcentratorManager.analogs_o.Count; i++)
-                        {
-                            if (tag_name_textbox.Text.Equals(dataConcentratorManager.analogs_o[i].TagName))
-                            {
-                                dataConcentratorManager.analogs_o.Remove(dataConcentratorManager.analogs_o[i]);
-                                tag_name_textbox.Text = "";
-                            }
-                        }
-                        break;
-
-                    case "Digital Input":
-                        for (int i = 0;
-                            i < dataConcentratorManager.digitals_i.Count; i++)
-                        {
-                            if (tag_name_textbox.Text.Equals(dataConcentratorManager.digitals_i[i].Tag_name))
-                            {
-                                dataConcentratorManager.digitals_i.Remove(dataConcentratorManager.digitals_i[i]);
-                                tag_name_textbox.Text = "";
-                            }
-                        }
-                        break;
-
-                    case "Digital Output":
-                        for (int i = 0;
-                            i < dataConcentratorManager.digitals_o.Count; i++)
-                        {
-                            if (tag_name_textbox.Text.Equals(dataConcentratorManager.digitals_o[i].Tag_name))
-                            {
-                                dataConcentratorManager.digitals_o.Remove(dataConcentratorManager.digitals_o[i]);
-                                tag_name_textbox.Text = "";
-                            }
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
+                refresh();
             }
             else
             {
@@ -148,6 +100,51 @@ namespace Scada
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             dataConcentratorManager.saveXML();
+        }
+
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //if (e.Equals(Keys.Enter))
+            //{
+            //    List<AnalogInput> myClass = dataGridView1.DataSource as List<AnalogInput>;
+            //    dataConcentratorManager.analogs_i.Clear();
+            //    dataConcentratorManager.analogs_i = myClass.ToList();
+            //}
+        }
+
+        private void edit_Click(object sender, EventArgs e)
+        {
+            if(tag_selector.SelectedIndex >= 0)
+            {
+                if (tag_name_textbox.Text != "")
+                {
+                    EditTagForm et = new EditTagForm(tag_selector.Text, tag_name_textbox.Text,
+                        this.dataConcentratorManager, this);
+                    if (et.tag_exists())
+                    {
+                        et.display_content();
+                        et.Show();
+                    }
+                    else
+                        MessageBox.Show("Tag doesn't exists.");
+                } else
+                {
+                    MessageBox.Show("Please enter tag name.");
+                }
+            } else
+            {
+                MessageBox.Show("Please select tag type.");
+            }
         }
     }
 }

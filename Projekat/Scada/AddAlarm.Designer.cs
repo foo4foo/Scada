@@ -145,6 +145,7 @@
             this.Controls.Add(this.submit);
             this.Name = "AddAlarm";
             this.Text = "AddAlarm";
+            this.Load += new System.EventHandler(this.AddAlarm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

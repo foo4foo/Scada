@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tag_name_textbox = new System.Windows.Forms.TextBox();
+            this.edit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,13 +48,13 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 41);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(543, 208);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
             // 
             // add_tag
             // 
-            this.add_tag.Location = new System.Drawing.Point(116, 255);
+            this.add_tag.Location = new System.Drawing.Point(12, 255);
             this.add_tag.Name = "add_tag";
             this.add_tag.Size = new System.Drawing.Size(114, 23);
             this.add_tag.TabIndex = 1;
@@ -130,11 +131,22 @@
             this.tag_name_textbox.Size = new System.Drawing.Size(100, 20);
             this.tag_name_textbox.TabIndex = 10;
             // 
+            // edit
+            // 
+            this.edit.Location = new System.Drawing.Point(291, 289);
+            this.edit.Name = "edit";
+            this.edit.Size = new System.Drawing.Size(95, 23);
+            this.edit.TabIndex = 11;
+            this.edit.Text = "Edit Tag";
+            this.edit.UseVisualStyleBackColor = true;
+            this.edit.Click += new System.EventHandler(this.edit_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(568, 335);
+            this.Controls.Add(this.edit);
             this.Controls.Add(this.tag_name_textbox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
@@ -165,5 +177,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tag_name_textbox;
+        private System.Windows.Forms.Button edit;
     }
 }

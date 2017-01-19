@@ -22,6 +22,7 @@ namespace Scada
 
         private void updateList()
         {
+            listView.Items.Clear();
             foreach (lib.Alarm alarm in dataConcentratorManager.alarms)
             {
                 ListViewItem item = new ListViewItem(alarm.Id);
@@ -34,21 +35,13 @@ namespace Scada
 
         private void remove_alarm_Click(object sender, EventArgs e)
         {
-            for(int i = 0; i < dataConcentratorManager.alarms.Count; i++)
-            {
-                if (dataConcentratorManager.alarms[i].Id.Equals(alarmID_textbox.Text))
-                {
-                    dataConcentratorManager.alarms.Remove(dataConcentratorManager.alarms[i]);
-                }
-            }
-
-
-            listView.Items.Clear();
+            dataConcentratorManager.Remove_Alarm(alarmID_textbox.Text.ToString());
             updateList();
         }
 
         private void RemoveAlarmForm_Load(object sender, EventArgs e)
         {
+            
             updateList();
         }
     }
