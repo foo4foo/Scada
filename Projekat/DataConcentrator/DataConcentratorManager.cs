@@ -1,12 +1,19 @@
 ﻿using System;
+
+using MySql;
+using MySql.Data;
+
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Threading;
 using System.Linq;
 using System.Xml.Serialization;
 using System.IO;
 using System.Text;
+using Data;
 using PLCSimulator;
 using lib;
+using MySql.Data.MySqlClient;
 
 namespace DataConcentrator
 {
@@ -14,13 +21,15 @@ namespace DataConcentrator
     public delegate void AlarmOccurredEventHandler(String msg);
     public class DataConcentratorManager
     {
-        PLCSimulatorManager plcSimulatorManager;
+
+        public PLCSimulatorManager plcSimulatorManager;
 
         public KeyValuePair<string, bool> ALARM;
 
         public event TagValueChangedEventHanlder TagValueChanged;
         public event AlarmOccurredEventHandler AlarmOccured;
 
+        ManualResetEvent _pauseEvent = new ManualResetEvent(true);
 
         public const String xml_analogs_i = "analogs_i.xml";
         public const String xml_analogs_o = "analogs_o.xml";
@@ -34,10 +43,9 @@ namespace DataConcentrator
         public List<DigitalOutput> digitals_o;
 
         public DataConcentratorManager()
-        {
-
+        {               
             plcSimulatorManager = new PLCSimulatorManager();
-
+            
             alarms = new List<Alarm>();
             analogs_i = new List<AnalogInput>();
             analogs_o = new List<AnalogOutput>();
@@ -52,34 +60,101 @@ namespace DataConcentrator
 
             plcSimulatorManager.loadAlarms(alarms);
             plcSimulatorManager.loadTags(analogs_i);
-
+            
             plcSimulatorManager.StartPLCSimulator();
             plcSimulatorManager.t5.Start();
 
         }
 
-        //public KeyValuePari<string, bool> CatchAlarms(){ }
-        //foreach(KeyValuePair<string, bool> pair in plcSimulatorManager.alarm_occured){
-        //if ...
-        //return pair;
-        //}
+        public Alarm getAlarm(String id)
+        {
+            Alarm a = new Alarm();
+
+            foreach(Alarm alarm in alarms)
+            {
+                if (alarm.Id.Equals(id))
+                {
+                    a.Id = alarm.Id;
+                    a.Tag = alarm.Tag;
+                    a.Message = alarm.Message;
+                    a.setTime(DateTime.Now.ToString("yyyy - MM - dd hh: mm:ss"));
+                    a.Above = alarm.Above;
+                    a.Limit_value = alarm.Limit_value;
+
+                    //return a;
+                }
+            }
+
+            return a;
+        }
+
+        public void save_to_database(Alarm alarm)
+        {
+            //upisi u mysql bazu
+            var db_conn = DBConnection.Instance();
+            db_conn.DatabaseName = "mysql";
+
+            if (db_conn.IsConnect())
+            {
+                try
+                {
+                    string cmdText = "INSERT INTO alarms.alarm VALUES (@id,@tag,@msg,@time,@above,@limit)";
+                    MySqlCommand cmd = new MySqlCommand(cmdText, db_conn.Connection);
+                    cmd.Parameters.Add("@id", alarm.Id);
+                    cmd.Parameters.Add("@tag", alarm.Tag);
+                    cmd.Parameters.Add("@msg", alarm.Message);
+                    cmd.Parameters.Add("@time", alarm.getTime());
+                    cmd.Parameters.Add("@above", alarm.Above == true ? 1 : 0);
+                    cmd.Parameters.Add("@limit", alarm.Limit_value);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (MySql.Data.MySqlClient.MySqlException ex)
+                {
+                    //pass
+                }
+                catch (System.InvalidOperationException ex)
+                {
+                    //pass
+                }
+            }
+
+            try
+            {
+                db_conn.Close();
+            }
+            catch (Exception e)
+            {
+                //pass
+            }
+        }
+
         public KeyValuePair<string, bool> CatchAlarms()
         {
+            //ovde je bag
             foreach(KeyValuePair<string, bool> pair in plcSimulatorManager.alarm_occured)
             {
                 Thread.Sleep(200);
 
                 if (pair.Value == true)
                 {
-                    
-                    //posalji event na formu
+                    Alarm alarm = getAlarm(pair.Key);
+
+                    save_to_database(alarm);
+
+                    //posalji event na formu7
+                    //*********************************************************
+                    //postavi staticko polje koje primati vrednost da je alarm uhvacen
                     //ALARM = pair;
-                    return pair;
+                    //*********************************************************
 
+                    //_pauseEvent.WaitOne(Timeout.Infinite);
+                    //plcSimulatorManager.alarm_occured[pair.Key] = false;
+                    //_pauseEvent.Set();
+
+                    return new KeyValuePair<string, bool>(pair.Key, true);
+                    //}
+                
                 }
-
-                plcSimulatorManager.alarm_occured.TryUpdate(pair.Key, false, true);
-                //plcSimulatorManager.alarm_occured[pair.Key] = false;
             }
 
             return new KeyValuePair<string, bool>();
@@ -111,7 +186,7 @@ namespace DataConcentrator
 
         public String getAlarmID(String st)
         {
-            return String.Format("{0}", st).ToString();
+            return st;
         }
 
         public void Add_Tag(Object obj, String type)
@@ -119,8 +194,12 @@ namespace DataConcentrator
             switch (type)
             {
                 case "Analog Input":
-                    analogs_i.Add((AnalogInput)obj);
-                    plcSimulatorManager.addresses.TryAdd(analogs_i[analogs_i.Count - 1].IO_address1, 0); //[analogs_i[analogs_i.Count - 1].IO_address1] = 0;
+                    AnalogInput ai = (AnalogInput) obj;
+
+                    analogs_i.Add(ai);
+                    plcSimulatorManager.ainputs.TryAdd(ai.TagName, ai);
+                    plcSimulatorManager.addresses.TryAdd(ai.IO_address1, 0);
+
                     break;
 
                 case "Analog Output":
@@ -203,11 +282,32 @@ namespace DataConcentrator
                         {
                             AnalogInput ai = analogs_i[i];
 
-                            analogs_i.Remove(analogs_i[i]);     
-
                             if (plcSimulatorManager.ainputs.TryRemove(ai.IO_address1, out ai))
                             {
                                 //pass
+                            }
+
+                            analogs_i.Remove(analogs_i[i]);
+
+                            for (int j = 0; j < alarms.Count; j++)
+                            {
+                                if (alarms[j].Tag.Equals(ai.TagName))
+                                {
+                                    Alarm al = alarms[j];
+
+                                    alarms.Remove(alarms[j]);
+                                    if (!plcSimulatorManager.flag_t5)
+                                    {
+                                        plcSimulatorManager.alarms.TryRemove(al.Tag, out al);
+                                    }
+
+                                    bool tmp = true;
+
+                                    if (plcSimulatorManager.alarm_occured.TryRemove(al.Id, out tmp))
+                                    {
+                                        //pass
+                                    }
+                                }
                             }
 
                         }
@@ -255,7 +355,7 @@ namespace DataConcentrator
         public void Add_Alarm(Alarm alarm)
         {
             this.alarms.Add(alarm);
-            plcSimulatorManager.alarms.TryAdd(alarm.Id, alarm);
+            plcSimulatorManager.alarms.TryAdd(alarm.Tag, alarm);
 
             for (int i = 0; i < analogs_i.Count; i++)
             {
@@ -272,6 +372,20 @@ namespace DataConcentrator
             {
                 if (alarms[i].Id.Equals(id))
                 {
+                    Alarm rl = alarms[i];
+
+                    if (plcSimulatorManager.alarms.TryRemove(rl.Tag, out rl))
+                    {
+                        //pass
+                    }
+
+                    bool tmp = true;
+
+                    if (plcSimulatorManager.alarm_occured.TryRemove(rl.Id, out tmp))
+                    {
+                        //pass
+                    }
+
                     alarms.Remove(alarms[i]);
 
                     foreach (AnalogInput ainput in analogs_i)
@@ -280,14 +394,10 @@ namespace DataConcentrator
                         {
                             if (ainput.Alarms[j].Id.Equals(id))
                             {
-                                Alarm alarm = ainput.Alarms[j];
+                               
 
                                 ainput.Alarms.Remove(ainput.Alarms[j]);
-
-                                if (plcSimulatorManager.alarms.TryRemove(alarm.Tag, out alarm))
-                                {
-                                    //pass
-                                }
+                                
                             }
                         }
                     }
@@ -365,3 +475,5 @@ namespace DataConcentrator
 
     }
 }
+
+

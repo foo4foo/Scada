@@ -42,6 +42,8 @@ namespace Scada
                                 get_alarms(),
                                 units_textbox.Text.ToString()), "Analog Input");
                                 this.form.refresh();
+
+                            MessageBox.Show(dataConcentratorManager.plcSimulatorManager.ainputs.Count.ToString());
                         } else
                         {
                             MessageBox.Show("Tag already exists.");

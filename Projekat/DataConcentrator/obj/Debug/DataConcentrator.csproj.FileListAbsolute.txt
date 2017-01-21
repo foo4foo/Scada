@@ -12,12 +12,18 @@ C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\D
 C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\DataConcentrator\obj\Debug\DataConcentrator.csprojResolveAssemblyReference.cache
 C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\DataConcentrator\obj\Debug\DataConcentrator.dll
 C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\DataConcentrator\obj\Debug\DataConcentrator.pdb
-D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\obj\Debug\DataConcentrator.csprojResolveAssemblyReference.cache
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\DataConcentrator.dll.config
 D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\DataConcentrator.dll
 D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\DataConcentrator.pdb
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\EntityFramework.dll
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\EntityFramework.SqlServer.dll
 D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\lib.dll
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\MySql.Data.dll
 D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\PLCSimulator.dll
 D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\lib.pdb
 D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\PLCSimulator.pdb
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\EntityFramework.xml
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\bin\Debug\EntityFramework.SqlServer.xml
+D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\obj\Debug\DataConcentrator.csprojResolveAssemblyReference.cache
 D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\obj\Debug\DataConcentrator.dll
 D:\III godina\SNUS\Projekat\Projekat\DataConcentrator\obj\Debug\DataConcentrator.pdb

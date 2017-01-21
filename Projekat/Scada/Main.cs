@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
@@ -7,8 +8,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Data;
 using lib;
 using DataConcentrator;
+using MySql.Data.MySqlClient;
 
 namespace Scada
 {
@@ -19,6 +22,8 @@ namespace Scada
 
         public Main(DataConcentratorManager dataConcentratorManager)
         {
+
+
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -34,20 +39,113 @@ namespace Scada
             nit.Start();
         }
 
+        public Alarm read_from_database(String id)
+        {
+            //MessageBox.Show("Iz read_from_database: ", id);
+            Alarm alarm = null;
+
+            MySqlConnection conn = null;
+    
+            try
+            {
+                conn = new MySqlConnection("Server=localhost; database=mysql; UID=root; password=nemamzicu");
+                conn.Open();
+
+                string query = String.Format("SELECT * FROM alarms.alarm WHERE ID = {0}", id == null ? "qwerty" : id).ToString();
+
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    alarm = new Alarm();
+
+                    alarm.Id = reader.GetString(0);
+                    alarm.Tag = reader.GetString(1);
+                    alarm.Message = reader.GetString(2);
+                    alarm.setTime(reader.GetString(3));
+                    alarm.Above = reader.GetInt32(4) == 1 ? true : false;
+                    alarm.Limit_value = reader.GetInt32(5);
+                }
+
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                //pass
+            }
+            catch (System.InvalidOperationException ex)
+            {
+                //pass
+            } finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+                
+            
+
+            if (alarm == null)
+                return new Alarm();
+            return alarm;
+        }
+
         public void checker()
         {
             while (true)
             {
                 if (dataConcentratorManager.CatchAlarms().Value)
                 {
+                    //MessageBox.Show("Iz checkera: ", dataConcentratorManager.CatchAlarms().Key);
+
+                    Alarm al = read_from_database(dataConcentratorManager.CatchAlarms().Key);
+
                     //istitaj iz baze alarm i prosledi string u event
                     this.dataConcentratorManager.AlarmOccuredFoo(
-                        String.Format("Alarm (ID: {0}) occurred. Value: {1}", 
-                        dataConcentratorManager.CatchAlarms().Key,
-                        dataConcentratorManager.CatchAlarms().Value).ToString());
+                        String.Format("Alarm (ID: {0}) occurred. {1}",
+                        al.Id,
+                        al.Message).ToString());
 
                     this.dataConcentratorManager.AlarmOccured -= (AlarmOccurredEventHandler)alarm_occurred;
+
+                    MessageBox.Show("Posle alarma",
+                            dataConcentratorManager.plcSimulatorManager.alarm_occured[
+                                dataConcentratorManager.CatchAlarms().Key].ToString());
+
+                    //ako ukonim iz alarm_occured ponovo ce se generisati jer je while petlji
+
+                    /*TODO: ukloni alarm iz liste, zatim pamti da ga vratis kad vrednost ode
+                    do druge granice !!!!*/
+
+                    if (dataConcentratorManager.plcSimulatorManager.alarms.TryRemove(al.Tag, out al))
+                    {
+                        bool tmp;
+
+                        if (dataConcentratorManager.plcSimulatorManager.alarm_occured.TryRemove(
+                            al.Id, out tmp))
+                        {
+                            //*************************************
+                            MessageBox.Show("USPEO SAM !");
+                            //*************************************
+                            /*TODO:IDEJA-kreirati novi dictionary u plcSim koji ce pamtiti da
+                             se alarm desiti i drzati ga disejblovanog dok ponovo ne dodje
+                             do te vrednosti*/
+                        }
+                    }
+
                 }
+
+                //try
+                //{
+                //    dataConcentratorManager.plcSimulatorManager.t5.Abort();
+                //    dataConcentratorManager.plcSimulatorManager.t5.Start();
+                //}
+                //catch (System.Threading.ThreadStateException tex)
+                //{
+                //    //
+                //}
             }
         }
 
@@ -131,11 +229,40 @@ namespace Scada
         {
             RemoveAlarmForm raf = new RemoveAlarmForm(this.dataConcentratorManager);
             raf.Show();
+            //proveri da li se brise alarm
+            MessageBox.Show(dataConcentratorManager.plcSimulatorManager.alarms.Count.ToString());
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             dataConcentratorManager.saveXML();
+
+            if (!dataConcentratorManager.plcSimulatorManager.flag_t1)
+            {
+                dataConcentratorManager.plcSimulatorManager.t1.Abort();
+            }
+
+            if (!dataConcentratorManager.plcSimulatorManager.flag_t2)
+            {
+                dataConcentratorManager.plcSimulatorManager.t2.Abort();
+            }
+
+            if (!dataConcentratorManager.plcSimulatorManager.flag_t3)
+            {
+                dataConcentratorManager.plcSimulatorManager.t3.Abort();
+            }
+
+            if (!dataConcentratorManager.plcSimulatorManager.flag_t4)
+            {
+                dataConcentratorManager.plcSimulatorManager.t4.Abort();
+            }
+
+            if (!dataConcentratorManager.plcSimulatorManager.flag_t5)
+            {
+                dataConcentratorManager.plcSimulatorManager.t5.Abort();
+            }
+            
+            Environment.Exit(0);
         }
 
         private void dataGridView1_Click(object sender, EventArgs e)
@@ -150,12 +277,12 @@ namespace Scada
 
         private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //if (e.Equals(Keys.Enter))
-            //{
-            //    List<AnalogInput> myClass = dataGridView1.DataSource as List<AnalogInput>;
-            //    dataConcentratorManager.analogs_i.Clear();
-            //    dataConcentratorManager.analogs_i = myClass.ToList();
-            //}
+            /*if (e.Equals(Keys.Enter))
+            {
+                List<AnalogInput> myClass = dataGridView1.DataSource as List<AnalogInput>;
+                dataConcentratorManager.analogs_i.Clear();
+                dataConcentratorManager.analogs_i = myClass.ToList();
+            }*/
         }
 
         private void edit_Click(object sender, EventArgs e)

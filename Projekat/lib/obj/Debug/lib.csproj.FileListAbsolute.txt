@@ -2,3 +2,4 @@ D:\III godina\SNUS\Projekat\Projekat\lib\bin\Debug\lib.dll
 D:\III godina\SNUS\Projekat\Projekat\lib\bin\Debug\lib.pdb
 D:\III godina\SNUS\Projekat\Projekat\lib\obj\Debug\lib.dll
 D:\III godina\SNUS\Projekat\Projekat\lib\obj\Debug\lib.pdb
+D:\III godina\SNUS\Projekat\Projekat\lib\obj\Debug\lib.csprojResolveAssemblyReference.cache

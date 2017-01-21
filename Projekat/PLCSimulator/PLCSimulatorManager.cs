@@ -7,14 +7,6 @@ using System.Threading;
 
 namespace PLCSimulator
 {
-    /// <summary>
-    /// PLC Simulator
-    /// 
-    /// 4 x ANALOG INPUT : ADDR001 - ADDR004
-    /// 4 x ANALOG OUTPUT: ADDR005 - ADDR008
-    /// 1 x DIGITAL INPUT: ADDR009
-    /// 1 x DIGITAL OUTPUT: ADDR010
-    /// </summary>
     public class PLCSimulatorManager
     {
         public ConcurrentDictionary<string, double> addresses;
@@ -22,7 +14,11 @@ namespace PLCSimulator
         public ConcurrentDictionary<string, lib.Alarm> alarms;
         public ConcurrentDictionary<string, bool> alarm_occured;
 
-        public Thread t5; //
+        //flagovi indikatori da li su threadovi zavrsili cilkus for petlje
+        public bool flag_t1, flag_t2, flag_t3, flag_t4, flag_t5;
+        
+        public Thread t1, t2, t3, t4, t5; // t1-t4 - generisanje vrednosti velicina
+                                          // t5 - provera alarma
 
         private object locker = new object();
 
@@ -36,27 +32,35 @@ namespace PLCSimulator
 
         public void StartPLCSimulator()
         {
-            Thread t1 = new Thread(GeneratingAnalogInputs);
+            flag_t1 = true;
+
+            t1 = new Thread(GeneratingAnalogInputs);
             t1.Start();
 
-            Thread t2 = new Thread(GeneratingDigitalInputs);
+            flag_t2 = true;
+
+            t2 = new Thread(GeneratingDigitalInputs);
             t2.Start();
 
-            Thread t3 = new Thread(GeneratingAnalogOutputs);
+            flag_t3 = true;
+
+            t3 = new Thread(GeneratingAnalogOutputs);
             t3.Start();
 
-            Thread t4 = new Thread(GeneratingDigitalOutputs);
+            flag_t4 = true;
+
+            t4 = new Thread(GeneratingDigitalOutputs);
             t4.Start();
+
+            flag_t5 = true;
 
             t5 = new Thread(CheckAlarms); //nit koja ce proveravati da li se alarm desava
         }
 
         private void CheckAlarms()
         {
-            while (true)
+            while (flag_t5)
             {
-                Thread.Sleep(1000);
-
                 lock (locker)
                 {
                     foreach(KeyValuePair<string, lib.Alarm> alarm in alarms)
@@ -83,7 +87,7 @@ namespace PLCSimulator
                             {
                                 String boundary = alarm.Value.Above == true ? "Above" : "Below";
 
-                                if (boundary.Equals("Above"))
+                                if (boundary.Equals("Below"))
                                 {
                                     foreach (KeyValuePair<string, double> pair in addresses)
                                     {
@@ -99,33 +103,37 @@ namespace PLCSimulator
                             }
                         }
                     }
+                    flag_t5 = false;
                 }
+                Thread.Sleep(200);
+
+                flag_t5 = true;
             }
         }
 
         private void GeneratingAnalogInputs()
         {
-            while (true)
+            while (flag_t1)
             {
-                Thread.Sleep(500);
-
                 lock (locker)
                 {
                     foreach (KeyValuePair<string, double> pair in addresses)
                     {
                         addresses[pair.Key] = 100 * Math.Sin((double)DateTime.Now.Second / 60 * Math.PI);
                     }
-
+                    flag_t1 = false;
                 }
+
+                Thread.Sleep(200);
+
+                flag_t1 = true;
             }
         }
 
         private void GeneratingDigitalInputs()
         {
-            while (true)
+            while (flag_t2)
             {
-                Thread.Sleep(5000);
-
                 lock (locker)
                 {
                     foreach (KeyValuePair<string, double> pair in addresses) {
@@ -138,33 +146,38 @@ namespace PLCSimulator
                             addresses[pair.Key] = 0;
                         }
                     }
+                    flag_t2 = false;
                 }
+
+                Thread.Sleep(200);
+
+                flag_t2 = true;
             }
         }
 
         private void GeneratingAnalogOutputs()
         {
-            while (true)
+            while (flag_t3)
             {
-                Thread.Sleep(1000);
-
                 lock (locker)
                 {
                     foreach (KeyValuePair<string, double> pair in addresses)
                     {
                         addresses[pair.Key] = 100 * DateTime.Now.Second / 60;
-                        //t5.Start();
                     }
+                    flag_t3 = false;
                 }
+                Thread.Sleep(200);
+
+                flag_t3 = true;
             }
         }
 
         private void GeneratingDigitalOutputs()
         {
-            while (true)
+            while (flag_t4)
             {
-                Thread.Sleep(8000);
-
+                
                 lock (locker)
                 {
                     foreach (KeyValuePair<string, double> pair in addresses)
@@ -178,7 +191,11 @@ namespace PLCSimulator
                             addresses[pair.Key] = 0;
                         }
                     }
+                    flag_t4 = false;
                 }
+                Thread.Sleep(200);
+
+                flag_t4 = true;
             }
         }
 

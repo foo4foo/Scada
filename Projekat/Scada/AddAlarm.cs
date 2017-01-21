@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using DataConcentrator;
@@ -41,6 +42,8 @@ namespace Scada
                     int.Parse(value_textbox.Text)
                     )
                 );
+
+            MessageBox.Show(dataConcentratorManager.plcSimulatorManager.alarms.Count.ToString());
         }
 
         private String generateID()
@@ -50,7 +53,7 @@ namespace Scada
             id.Append(message_textbox.Text);
             id.Append(value_textbox.Text);
             id.Append(bound_combo.SelectedItem.ToString());
-            id.Append(DateTime.Now.ToString());
+            id.Append(DateTime.Now.Millisecond.ToString());
 
             return id.ToString();
         }

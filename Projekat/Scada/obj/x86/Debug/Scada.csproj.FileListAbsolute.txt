@@ -23,21 +23,23 @@ C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\S
 C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\obj\x86\Debug\Scada.MainForm.resources
 C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\obj\x86\Debug\Scada.Properties.Resources.resources
 C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\Scada\obj\x86\Debug\Scada.csproj.GenerateResource.Cache
-D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.csprojResolveAssemblyReference.cache
-D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.Properties.Resources.resources
-D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.csproj.GenerateResource.Cache
+D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\Scada.exe.config
 D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\Scada.exe
 D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\Scada.pdb
 D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\DataConcentrator.dll
 D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\lib.dll
+D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\MySql.Data.dll
 D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\PLCSimulator.dll
 D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\DataConcentrator.pdb
 D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\lib.pdb
 D:\III godina\SNUS\Projekat\Projekat\Scada\bin\Debug\PLCSimulator.pdb
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.csprojResolveAssemblyReference.cache
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.AddAlarm.resources
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.AddForm.resources
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.EditTagForm.resources
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.Main.resources
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.Properties.Resources.resources
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.RemoveAlarmForm.resources
+D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.csproj.GenerateResource.Cache
 D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.exe
 D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.pdb
-D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.AddForm.resources
-D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.Main.resources
-D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.AddAlarm.resources
-D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.RemoveAlarmForm.resources
-D:\III godina\SNUS\Projekat\Projekat\Scada\obj\x86\Debug\Scada.EditTagForm.resources

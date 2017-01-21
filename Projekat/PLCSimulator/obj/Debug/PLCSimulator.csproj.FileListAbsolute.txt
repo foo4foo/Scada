@@ -10,8 +10,8 @@ C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\P
 C:\Users\stefan\Downloads\Primeri resenja\Primeri resenja\Projekat P2\Projekat\PLCSimulator\obj\Debug\PLCSimulator.pdb
 D:\III godina\SNUS\Projekat\Projekat\PLCSimulator\bin\Debug\PLCSimulator.dll
 D:\III godina\SNUS\Projekat\Projekat\PLCSimulator\bin\Debug\PLCSimulator.pdb
+D:\III godina\SNUS\Projekat\Projekat\PLCSimulator\bin\Debug\lib.dll
+D:\III godina\SNUS\Projekat\Projekat\PLCSimulator\bin\Debug\lib.pdb
 D:\III godina\SNUS\Projekat\Projekat\PLCSimulator\obj\Debug\PLCSimulator.csprojResolveAssemblyReference.cache
 D:\III godina\SNUS\Projekat\Projekat\PLCSimulator\obj\Debug\PLCSimulator.dll
 D:\III godina\SNUS\Projekat\Projekat\PLCSimulator\obj\Debug\PLCSimulator.pdb
-D:\III godina\SNUS\Projekat\Projekat\PLCSimulator\bin\Debug\lib.dll
-D:\III godina\SNUS\Projekat\Projekat\PLCSimulator\bin\Debug\lib.pdb
